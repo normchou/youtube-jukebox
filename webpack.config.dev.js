@@ -6,12 +6,13 @@ const baseconfig = require('./webpack.config.base')
 module.exports = baseconfig({
   devtool: 'cheap-module-eval-source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000/',
-    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'src/main.js')
   ],
   output: {
-    filename: '[name].js'
+    path: path.join(__dirname, '/dist/'),
+    filename: '[name].js',
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

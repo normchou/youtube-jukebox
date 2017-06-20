@@ -1,13 +1,18 @@
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
+const path = require('path')
+const express = require('express')
+const webpack = require('webpack')
+const webpackMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const config = require('../webpack.config.dev')
+const api = require('./routes/api');
 
-var webPackConfig = require('../webpack.config.dev')
-var compiler = webpack(webPackConfig)
+const app = express()
+const port = 3000
 
-var webServerConfig = {
-  publicPath: webPackConfig.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
+const compiler = webpack(config)
+const middleware = webpackMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  contentBase: 'src',
   stats: {
     colors: true,
     hash: false,
@@ -16,11 +21,18 @@ var webServerConfig = {
     chunkModules: false,
     modules: false
   }
-}
+});
 
-var port = 3000
+app.use(middleware)
+app.use(webpackHotMiddleware(compiler))
 
-var server = new WebpackDevServer(compiler, webServerConfig)
+app.use('/api', api)
 
-server.listen(port)
-console.info('==> 🌎 Listening on port %s', port)
+app.get('*', (req, res) => {
+  res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '..', 'dist/index.html')))
+  res.end()
+})
+
+app.listen(port, () => {
+  console.info('==> 🌎 Listening on port %s', port)
+})
