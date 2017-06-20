@@ -7,7 +7,26 @@
     "start": "cross-env NODE_ENV=production node ./server/prodServer",
     "prebuild": "npm run build:clean",
     "build:clean": "rimraf build",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --color -p --progress"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --color -p --progress",
+    "precommit": "lint-staged",
+    "lint": "standard"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "jest",
+      "expect",
+      "it",
+      "test",
+      "describe"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --semi false --single-quote",
+      "standard --fix",
+      "git add"
+    ]
   },
   "license": "MIT",
   "devDependencies": {
@@ -25,8 +44,11 @@
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.28.0",
     "json-loader": "^0.5.4",
+    "lint-staged": "^4.0.0",
+    "prettier": "^1.4.4",
     "redbox-react": "^1.4.2",
     "rimraf": "^2.6.1",
+    "standard": "^10.0.2",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
