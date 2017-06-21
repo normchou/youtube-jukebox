@@ -4,7 +4,8 @@ const webpack = require('webpack')
 const webpackMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const config = require('../webpack.config.dev')
-const api = require('./routes/api');
+const api = require('./routes/api')
+const search = require('./routes/search')
 
 const app = express()
 const port = 3000
@@ -27,6 +28,7 @@ app.use(middleware)
 app.use(webpackHotMiddleware(compiler))
 
 app.use('/api', api)
+app.use('/search', search)
 
 app.get('*', (req, res) => {
   res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '..', 'dist/index.html')))

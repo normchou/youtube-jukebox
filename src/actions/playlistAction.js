@@ -4,9 +4,12 @@ import routes from '../constants/routes'
 
 export const loadPlaylist = () => {
   return dispatch => {
-    axios.get(routes.playlist.api )
+    axios.get(routes.playlist.api)
       .then(res => {
-        console.log('response from action', res.data)
+        dispatch({
+          type: actionType.LOAD_PLAYLIST_SUCCESS,
+          payload: res.data
+        })
       })
       .catch(err => {
         console.log('error from action', err)
