@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { map, isUndefined } from 'lodash'
 import YouTube from 'react-youtube'
-import cx from 'classnames'
+import Search from './Search'
 
 class Playlist extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Playlist extends Component {
     }
 
     return map(currentPlaylist, (song, i) => {
-      return <li key={i}>{song.title}</li>
+      return <li key={i} onClick={() => this.setState({ currentVideoCount: i })}>{song.title}</li>
     })
   }
 
@@ -78,6 +78,9 @@ class Playlist extends Component {
         <ul>
           {this.renderSongs()}
         </ul>
+        <div>
+          <Search {...this.props} />
+        </div>
       </div>
     )
   }

@@ -17,7 +17,7 @@ class Search extends Component {
   }
 
   addToPlaylist(video) {
-    this.props.updatePlaylist('norm', video)
+    this.props.updatePlaylist(this.props.playlist.activePlaylist, video)
   }
 
   render () {
