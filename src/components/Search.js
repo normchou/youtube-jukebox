@@ -6,6 +6,7 @@ class Search extends Component {
     super(props)
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.addToPlaylist = this.addToPlaylist.bind(this)
   }
 
   onSubmit(e) {
@@ -16,7 +17,7 @@ class Search extends Component {
   }
 
   addToPlaylist(video) {
-    console.log('video clicked is', video)
+    this.props.updatePlaylist('norm', video)
   }
 
   render () {

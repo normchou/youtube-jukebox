@@ -7,8 +7,6 @@ import Routes from './Routes'
 import history from './history'
 import { Route } from 'react-router'
 import Playlist from './Playlist'
-import { persistStore, autoRehydrate } from 'redux-persist'
-
 
 const App = withRouter(Routes)
 

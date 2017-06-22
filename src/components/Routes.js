@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
-import { loadPlaylist, createPlaylist } from '../actions/playlistActions'
+import { loadPlaylist, createPlaylist, updatePlaylist } from '../actions/playlistActions'
 import { searchYouTube } from '../actions/searchActions'
 import Home from './Home'
 import Playlist from './Playlist'
@@ -32,4 +32,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-export default connect(mapStateToProps, { createPlaylist, loadPlaylist, searchYouTube })(Routes)
+export default connect(mapStateToProps, { createPlaylist, updatePlaylist, loadPlaylist, searchYouTube })(Routes)

@@ -49,3 +49,24 @@ export const createPlaylist = (playlistName) => {
       })
   }
 }
+
+export const updatePlaylist = (playlistName, video) => {
+  return dispatch => {
+    dispatch({ type: actionType.UPDATE_PLAYLIST_REQUEST })
+
+    axios.post(`${routes.playlist.api}/update`, { name: playlistName, video })
+      .then(res => {
+        dispatch({
+          type: actionType.UPDATE_PLAYLIST_SUCCESS,
+          payload: res.data
+        })
+        dispatch(push('/playlist'))
+      })
+      .catch(err => {
+        dispatch({
+          type: actionType.UPDATE_PLAYLIST_FAILED,
+          payload: err
+        })
+      })
+  }
+}

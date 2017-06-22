@@ -3,7 +3,8 @@ import actionType from '../constants/actionTypes'
 
 let initialState = {
   videos: [],
-  currentPlaylist: '',
+  currentPlaylist: [],
+  activePlaylist: '',
   loading: false,
   error: ''
 }
@@ -20,11 +21,15 @@ export default (state=initialState, action) => {
       return state
 
     case actionType.CREATE_PLAYLIST_SUCCESS:
-      state = assign({}, state, { currentPlaylist: action.payload, loading: false })
+      state = assign({}, state, { activePlaylist: action.payload, loading: false })
       return state
 
     case actionType.CREATE_PLAYLIST_FAILED:
       state = assign({}, state, { error: action.payload, loading: false })
+      return state
+
+    case actionType.UPDATE_PLAYLIST_SUCCESS:
+      state = assign({}, state, { currentPlaylist: action.payload.songs, loading: false })
       return state
 
     default:
