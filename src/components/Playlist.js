@@ -1,19 +1,57 @@
 import React, { Component } from 'react'
 import { map } from 'lodash'
+import YouTube from 'react-youtube'
+import cx from 'classnames'
 
 class Playlist extends Component {
   constructor(props) {
     super(props)
 
+    this.props.loadPlaylist()
+
+    this.state = {
+      currentVideoCount: 0
+    }
+
     this.renderSongs = this.renderSongs.bind(this)
+    this.renderVideo = this.renderVideo.bind(this)
+    this.whenVideoEnds = this.whenVideoEnds.bind(this)
   }
 
   renderSongs() {
     const { currentPlaylist } = this.props.playlist
 
+    if (currentPlaylist.length === 0) {
+      return null
+    }
+
     return map(currentPlaylist, (song, i) => {
       return <li key={i}>{song.title}</li>
     })
+  }
+
+  whenVideoEnds() {
+      this.setState({
+        currentVideoCount: this.state.currentVideoCount + 1
+      })
+  }
+
+  renderVideo() {
+    const { currentPlaylist } = this.props.playlist
+
+    if (currentPlaylist.length === 0) {
+      return null
+    }
+
+    const count = this.state.currentVideoCount
+    const videoId = currentPlaylist[count].videoId
+
+    return (
+      <YouTube
+          videoId={videoId}
+          onEnd={this.whenVideoEnds}
+          opts={{ height: "390", width: "640", playerVars: { autoplay: 1 }}} />
+    )
   }
 
   render () {
@@ -31,6 +69,7 @@ class Playlist extends Component {
       <div>
         <h1>Playlist</h1>
         <p>{message}</p>
+        {this.renderVideo()}
         <ul>
           {this.renderSongs()}
         </ul>

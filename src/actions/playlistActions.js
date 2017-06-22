@@ -7,7 +7,7 @@ export const loadPlaylist = (playlistId) => {
   return dispatch => {
     dispatch({ type: actionType.LOAD_PLAYLIST_REQUEST })
 
-    axios.post(routes.playlist.api, { id: playlistId })
+    axios.get(routes.playlist.api)
       .then(res => {
         dispatch({
           type: actionType.LOAD_PLAYLIST_SUCCESS,

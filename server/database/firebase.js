@@ -13,7 +13,7 @@ const init = () => {
 }
 
 const getPlaylistDB = () => {
-  return database.ref('/').once('value')
+  return database.ref('/playlists/norm').once('value')
 }
 
 const getSongsDB = (playlistId) => {

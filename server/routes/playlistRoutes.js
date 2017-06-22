@@ -2,8 +2,12 @@ const express = require('express')
 const router = express.Router()
 const firebase = require('../database/firebase')
 
-router.get('/', (req, res, next) => {
-  res.json({"message" : "Hi Melissa"})
+router.get('/', (request, response, next) => {
+  firebase.getPlaylistDB()
+    .then(res => {
+      response.json({ "playlist": res.val() })
+    })
+    .catch(err => response.json({ "error": "server error" }))
 })
 
 router.post('/create', (request, response, next) => {

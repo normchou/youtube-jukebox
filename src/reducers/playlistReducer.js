@@ -2,7 +2,6 @@ import { assign } from 'lodash'
 import actionType from '../constants/actionTypes'
 
 let initialState = {
-  videos: [],
   currentPlaylist: [],
   activePlaylist: '',
   loading: false,
@@ -13,7 +12,7 @@ export default (state=initialState, action) => {
 
   switch(action.type) {
     case actionType.LOAD_PLAYLIST_SUCCESS:
-      state = assign({}, state, { videos: action.payload })
+      state = assign({}, state, { currentPlaylist: action.payload.playlist.songs })
       return state
 
   case actionType.CREATE_PLAYLIST_REQUEST:
