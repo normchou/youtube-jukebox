@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Fade } from 'react-router-dom'
-import { loadPlaylist } from '../actions/playlistAction'
-import { searchYouTube } from '../actions/search'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
+import { loadPlaylist, createPlaylist } from '../actions/playlistActions'
+import { searchYouTube } from '../actions/searchActions'
 import Home from './Home'
 import Playlist from './Playlist'
 import Search from './Search'
@@ -10,21 +11,19 @@ import Search from './Search'
 class Routes extends Component {
   constructor(props) {
     super(props)
-    this.props.loadPlaylist
   }
 
   render() {
     return (
-      <Router >
+      <ConnectedRouter {...this.props}>
         <Switch>
           <Route exact path='/' render={() => <Home {...this.props} />} />
           <Route path='/search' render={() => <Search {...this.props} />} />
           <Route path='/search/:searchPhrase' component={Search} />
-          <Route path='/playlist' component={Playlist} />
+          <Route path='/playlist' render={() => <Playlist {...this.props} />} />
           <Route path='/playlist/:id' component={Playlist} />
-          <Route component={Home} />
         </Switch>
-      </Router>
+      </ConnectedRouter>
     )
   }
 }
@@ -33,4 +32,4 @@ const mapStateToProps = (state) => {
   return state
 }
 
-export default connect(mapStateToProps, { loadPlaylist, searchYouTube })(Routes)
+export default connect(mapStateToProps, { createPlaylist, loadPlaylist, searchYouTube })(Routes)

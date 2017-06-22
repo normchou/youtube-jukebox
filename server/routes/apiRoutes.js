@@ -1,5 +1,5 @@
 const express = require('express')
-const playlistApi = require('./playlist')
+const playlistApi = require('./playlistRoutes')
 const app = express()
 const router = express.Router()
 

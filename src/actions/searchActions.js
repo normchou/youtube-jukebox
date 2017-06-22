@@ -6,7 +6,7 @@ export const searchYouTube = (word) => {
   return dispatch => {
     dispatch({ type: actionType.SEARCH_YOUTUBE_REQUEST });
 
-    axios.post(`${routes.search.url}/${word}`)
+    axios.post(routes.search.url, { search: word })
       .then(res => {
         dispatch({
           type: actionType.SEARCH_YOUTUBE_SUCCESS,

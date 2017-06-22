@@ -11,9 +11,8 @@ class Search extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const searchPhrase = this.refs['search-phrase'].value
-
-    this.props.searchYouTube(searchPhrase)
+    let searchPhraseRef = this.refs['search-phrase']
+    this.props.searchYouTube(searchPhraseRef.value)
   }
 
   addToPlaylist(video) {
@@ -22,7 +21,6 @@ class Search extends Component {
 
   render () {
     const searchResult = this.props.search.result
-
     return (
       <div>
         <h1 style={{ marginLeft: '40px' }}>Search</h1>
