@@ -12,15 +12,21 @@ const init = () => {
   console.log('==> 🔥 Firebase initialized')
 }
 
-const getPlaylistDB = () => {
-  return database.ref('/playlists/norm').once('value')
+const getPlaylist = (name) => {
+  return new Promise((resolve, reject) => {
+    database.ref('/playlists').once('value')
+      .then((playlists) => {
+        if (playlists.val()[name]) {
+          return resolve(playlists.val()[name])
+        }
+
+        return reject({ "error": "no playlist found"})
+      })
+      .catch(err => reject({ "error": "no playlist found"}))
+  })
 }
 
-const getSongsDB = (playlistId) => {
-  return database.ref(`/${playlistId}`).once('value')
-}
-
-const addPlaylist = (name) => {
+const createPlaylist = (name) => {
   let model = playlistModel(
     name,
     firebase.database.ServerValue.TIMESTAMP
@@ -37,8 +43,7 @@ const addPlaylist = (name) => {
 
 const updatePlaylist = (name, video) => {
   return new Promise((resolve, reject) => {
-    database.ref(`/playlists/${name}`)
-      .once('value')
+    database.ref(`/playlists/${name}`).once('value')
       .then((playlist) => {
         let songs = playlist.val().songs || []
         const { videoId, title, description, channel, img } = video
@@ -56,8 +61,7 @@ const updatePlaylist = (name, video) => {
 
 module.exports = {
   init,
-  getPlaylistDB,
-  getSongsDB,
-  addPlaylist,
+  getPlaylist,
+  createPlaylist,
   updatePlaylist
 }

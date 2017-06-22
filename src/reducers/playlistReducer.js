@@ -12,17 +12,22 @@ export default (state=initialState, action) => {
 
   switch(action.type) {
     case actionType.LOAD_PLAYLIST_SUCCESS:
-      state = assign({}, state, { currentPlaylist: action.payload.playlist.songs })
+      state = assign({}, state, {
+        currentPlaylist: action.payload.playlist.songs || [],
+        activePlaylist: action.payload.playlist.playlistName,
+        error: ''
+      })
+      return state
+    case actionType.LOAD_PLAYLIST_FAILED:
+      state = assign({}, state, { error: action.payload })
       return state
 
-  case actionType.CREATE_PLAYLIST_REQUEST:
-      state = assign({}, state, { loading: true })
-      return state
-
+    case actionType.CREATE_PLAYLIST_REQUEST:
+        state = assign({}, state, { loading: true })
+        return state
     case actionType.CREATE_PLAYLIST_SUCCESS:
-      state = assign({}, state, { activePlaylist: action.payload, loading: false })
+      state = assign({}, state, { activePlaylist: action.payload, loading: false, error: '' })
       return state
-
     case actionType.CREATE_PLAYLIST_FAILED:
       state = assign({}, state, { error: action.payload, loading: false })
       return state

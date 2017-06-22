@@ -3,19 +3,31 @@ import actionType from '../constants/actionTypes'
 import routes from '../constants/routes'
 import { push } from 'react-router-redux'
 
-export const loadPlaylist = (playlistId) => {
+export const loadPlaylist = (playlistName) => {
   return dispatch => {
     dispatch({ type: actionType.LOAD_PLAYLIST_REQUEST })
 
-    axios.get(routes.playlist.api)
+    axios.post(routes.playlist.api, { name: playlistName })
       .then(res => {
-        dispatch({
-          type: actionType.LOAD_PLAYLIST_SUCCESS,
-          payload: res.data
-        })
+        if (res.data.error) {
+          dispatch({
+            type: actionType.LOAD_PLAYLIST_FAILED,
+            payload: res.data.error
+          })
+          dispatch(push(`/playlist/${playlistName}`))
+        } else {
+          dispatch({
+            type: actionType.LOAD_PLAYLIST_SUCCESS,
+            payload: res.data
+          })
+          dispatch(push(`/playlist/${playlistName}`))
+        }
       })
       .catch(err => {
-        console.log('error from action', err)
+        dispatch({
+          type: actionType.LOAD_PLAYLIST_FAILED,
+          payload: err
+        })
       })
   }
 }
@@ -31,13 +43,13 @@ export const createPlaylist = (playlistName) => {
             type: actionType.CREATE_PLAYLIST_FAILED,
             payload: res.data.error
           })
-          dispatch(push('/playlist'))
+          dispatch(push(`/playlist/${playlistName}`))
         } else {
           dispatch({
             type: actionType.CREATE_PLAYLIST_SUCCESS,
             payload: res.data.playlistName
           })
-          dispatch(push('/playlist'))
+          dispatch(push(`/playlist/${playlistName}`))
         }
       })
       .catch(err => {
@@ -45,7 +57,7 @@ export const createPlaylist = (playlistName) => {
           type: actionType.CREATE_PLAYLIST_FAILED,
           payload: err
         })
-        dispatch(push('/playlist'))
+        dispatch(push(`/playlist/${playlistName}`))
       })
   }
 }
@@ -60,7 +72,7 @@ export const updatePlaylist = (playlistName, video) => {
           type: actionType.UPDATE_PLAYLIST_SUCCESS,
           payload: res.data
         })
-        dispatch(push('/playlist'))
+        dispatch(push(`/playlist/${playlistName}`))
       })
       .catch(err => {
         dispatch({

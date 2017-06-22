@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { map } from 'lodash'
+import { map, isUndefined } from 'lodash'
 import YouTube from 'react-youtube'
 import cx from 'classnames'
 
@@ -7,7 +7,12 @@ class Playlist extends Component {
   constructor(props) {
     super(props)
 
-    this.props.loadPlaylist()
+    if (this.props.playlist.activePlaylist.length < 1) {
+      const pathName = this.props.history.location.pathname
+      const playlistName = pathName.split('/')[2]
+
+      this.props.loadPlaylist(playlistName)
+    }
 
     this.state = {
       currentVideoCount: 0

@@ -13,8 +13,7 @@ class Home extends Component {
 
     const playlistRef = this.refs['playlist-id']
 
-    console.log(playlistRef.value)
-    this.props.loadPlaylist
+    this.props.loadPlaylist(playlistRef.value)
   }
 
   onCreateSubmit(e) {
