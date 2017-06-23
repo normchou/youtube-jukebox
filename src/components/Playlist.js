@@ -11,7 +11,7 @@ class Playlist extends Component {
       const pathName = this.props.history.location.pathname
       const playlistName = pathName.split('/')[2]
 
-      this.props.loadPlaylist(playlistName)
+      // this.props.loadPlaylist(playlistName)
     }
 
     this.state = {

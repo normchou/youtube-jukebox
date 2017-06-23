@@ -14,13 +14,13 @@ export const loadPlaylist = (playlistName) => {
             type: actionType.LOAD_PLAYLIST_FAILED,
             payload: res.data.error
           })
-          dispatch(push(`/playlist/${playlistName}`))
+          // dispatch(push(`/playlist/${playlistName}`))
         } else {
           dispatch({
             type: actionType.LOAD_PLAYLIST_SUCCESS,
             payload: res.data
           })
-          dispatch(push(`/playlist/${playlistName}`))
+          // dispatch(push(`/playlist/${playlistName}`))
         }
       })
       .catch(err => {
@@ -43,13 +43,13 @@ export const createPlaylist = (playlistName) => {
             type: actionType.CREATE_PLAYLIST_FAILED,
             payload: res.data.error
           })
-          dispatch(push(`/playlist/${playlistName}`))
+          // dispatch(push(`/playlist/${playlistName}`))
         } else {
           dispatch({
             type: actionType.CREATE_PLAYLIST_SUCCESS,
             payload: res.data.playlistName
           })
-          dispatch(push(`/playlist/${playlistName}`))
+          // dispatch(push(`/playlist/${playlistName}`))
         }
       })
       .catch(err => {
@@ -57,7 +57,7 @@ export const createPlaylist = (playlistName) => {
           type: actionType.CREATE_PLAYLIST_FAILED,
           payload: err
         })
-        dispatch(push(`/playlist/${playlistName}`))
+        // dispatch(push(`/playlist/${playlistName}`))
       })
   }
 }
@@ -72,7 +72,7 @@ export const updatePlaylist = (playlistName, video) => {
           type: actionType.UPDATE_PLAYLIST_SUCCESS,
           payload: res.data
         })
-        dispatch(push(`/playlist/${playlistName}`))
+        // dispatch(push(`/playlist/${playlistName}`))
       })
       .catch(err => {
         dispatch({
