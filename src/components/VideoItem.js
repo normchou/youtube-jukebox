@@ -8,9 +8,10 @@ const containerStyle = {
 }
 
 const imageContainerStyle = {
-  width: '30%',
+  width: '140px',
   textAlign: 'center',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  marginRight: '12px'
 }
 
 const imageStyle = {
@@ -19,7 +20,6 @@ const imageStyle = {
 }
 
 const descriptionContainerStyle = {
-  width: '70%',
   paddingTop: 5
 }
 

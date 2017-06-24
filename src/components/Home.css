@@ -5,7 +5,7 @@
 }
 
 .disabling-div {
-  display: none;
+  visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,11 +13,10 @@
   width: 100%;
   z-index: 5;
   transition: 0.5s;
-  background: rgba(255,255,255,.8);
 }
 
 .disabling-div--show {
-  display: block;
+  visibility: visible;
   background: rgba(255,255,255, .2);
 }
 
@@ -74,17 +73,16 @@
 
 .search-drawer {
   height: 100%;
-  width: 0px;
+  width: 420px;
   position: fixed;
   z-index: 10;
   top: 0;
-  right: 0;
+  right: -420px;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
 }
 
 .search-drawer-open {
-  width: 400px;
+  right: 0;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 import Video from './Video'
 import Playlist from './Playlist2'
+import Search from './Search'
 
 import './Home.css'
 
@@ -57,12 +58,12 @@ class Home extends Component {
     )
   }
 
-  onSearchClick(e) {
-    e.preventDefault()
+  onSearchClick() {
 
     this.setState({
       isSearchDrawerOpen: !this.state.isSearchDrawerOpen
     })
+    console.log('state...', this.state.isSearchDrawerOpen)
   }
 
   renderNav() {
@@ -87,7 +88,7 @@ class Home extends Component {
           }
         </div>
         <div className={searchClass}>
-
+          <Search {...this.props} onClose={this.onSearchClick.bind(this)} />
         </div>
       </div>
     )
