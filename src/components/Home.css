@@ -1,0 +1,90 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.disabling-div {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  transition: 0.5s;
+  background: rgba(255,255,255,.8);
+}
+
+.disabling-div--show {
+  display: block;
+  background: rgba(255,255,255, .2);
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #212121;
+  width: 60%;
+}
+
+.playlist-container {
+  background-color: #212121;
+  width: 40%;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  height: 84px;
+  background-color: #263238;
+}
+
+.nav-title {
+  padding-left: 40px;
+  color: #FAFAFA;
+  font-size: 25px;
+  letter-spacing: 3px;
+}
+
+.nav-search {
+  margin-left: auto;
+  padding-right: 40px;
+}
+
+.nav-search-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.nav-search-icon {
+  color: #FAFAFA;
+  font-size: 36px;
+}
+
+.search-drawer {
+  height: 100%;
+  width: 0px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.search-drawer-open {
+  width: 400px;
+}
