@@ -32,11 +32,13 @@
   align-items: center;
   background-color: #212121;
   width: 60%;
+  height: 704px;
 }
 
 .playlist-container {
   background-color: #212121;
   width: 40%;
+  overflow: scroll;
 }
 
 .nav-container {

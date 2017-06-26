@@ -3,21 +3,15 @@ import { map } from 'lodash'
 import VideoItem from './VideoItem'
 
 const containerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%',
   padding: '0 10px'
 }
 
 const titleContainerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  margin: '10px 0',
+  padding: '30px 0',
+  position: 'fixed',
   width: '100%',
-  height: '20%',
-  paddingLeft: 18
+  height: 45,
+  backgroundColor: '#212121'
 }
 
 const titleFontStyle = {
@@ -27,9 +21,8 @@ const titleFontStyle = {
 }
 
 const listStyle = {
-  marginBottom: 10,
-  width: '100%',
-  height: '100%'
+  paddingBottom: 10,
+  paddingTop: 100
 }
 
 const Playlist = ({playlistName, songs, playSong}) => {
