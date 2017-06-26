@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import cx from 'classnames'
 import Video from './Video'
-import Playlist from './Playlist2'
+import Playlist from './Playlist'
 import Search from './Search'
+import { get } from 'lodash'
 
 import './Home.css'
 
@@ -12,7 +13,8 @@ class Home extends Component {
 
     this.state = {
       isSearchDrawerOpen: false,
-      isPlaylistLoaded: true
+      isPlaylistLoaded: true,
+      currentVideo: 0
     }
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -21,6 +23,7 @@ class Home extends Component {
     this.props.loadPlaylist('norm')
   }
 
+  // TODO: Add creating and searching playlists
   onSubmit(e) {
     e.preventDefault()
 
@@ -59,11 +62,9 @@ class Home extends Component {
   }
 
   onSearchClick() {
-
     this.setState({
       isSearchDrawerOpen: !this.state.isSearchDrawerOpen
     })
-    console.log('state...', this.state.isSearchDrawerOpen)
   }
 
   renderNav() {
@@ -94,6 +95,22 @@ class Home extends Component {
     )
   }
 
+  loadVideo(songs) {
+    return get(songs[this.state.currentVideo], 'videoId', undefined)
+  }
+
+  playNext() {
+    this.setState({
+      currentVideo: this.state.currentVideo + 1
+    })
+  }
+
+  playSong(i) {
+    this.setState({
+      currentVideo: i
+    })
+  }
+
   render () {
     const disablingDivClass = cx({
       'disabling-div': true,
@@ -106,13 +123,16 @@ class Home extends Component {
         {this.renderNav()}
         <div className="content-container">
           <div className="video-container">
-            <Video name='' playNext={() => console.log('play next')} />
+            <Video
+              name={this.loadVideo(this.props.playlist.currentPlaylist)}
+              playNext={this.playNext.bind(this)} />
           </div>
           <div className="playlist-container">
             <Playlist
-              playlistName="COOL"
+              playlistName="My Cool Playlist"
+              currentVideo={this.state.currentVideo}
               songs={this.props.playlist.currentPlaylist}
-              playSong={(e) => console.log('play song', e)} />
+              playSong={(i) => this.playSong(i)} />
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const search = (auth, searchTerm) => {
     service.search.list({
       auth: auth,
       part: 'snippet',
-      maxResults: '10',
+      maxResults: '20',
       q: searchTerm,
       type: 'video'
     }, (error, response) => {

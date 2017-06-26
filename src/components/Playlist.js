@@ -1,89 +1,51 @@
-import React, { Component } from 'react'
-import { map, isUndefined } from 'lodash'
-import YouTube from 'react-youtube'
-import Search from './Search'
+import React from 'react'
+import { map } from 'lodash'
+import VideoItem from './VideoItem'
 
-class Playlist extends Component {
-  constructor(props) {
-    super(props)
+const containerStyle = {
+  padding: '0 10px'
+}
 
-    if (this.props.playlist.activePlaylist.length < 1) {
-      const pathName = this.props.history.location.pathname
-      const playlistName = pathName.split('/')[2]
+const titleContainerStyle = {
+  padding: '30px 0',
+  position: 'fixed',
+  width: '100%',
+  height: 45,
+  backgroundColor: '#212121'
+}
 
-      // this.props.loadPlaylist(playlistName)
-    }
+const titleFontStyle = {
+  fontSize: 32,
+  color: 'grey',
+  letterSpacing: 3
+}
 
-    this.state = {
-      currentVideoCount: 0
-    }
+const listStyle = {
+  paddingBottom: 10,
+  paddingTop: 100
+}
 
-    this.renderSongs = this.renderSongs.bind(this)
-    this.renderVideo = this.renderVideo.bind(this)
-    this.whenVideoEnds = this.whenVideoEnds.bind(this)
-  }
-
-  renderSongs() {
-    const { currentPlaylist } = this.props.playlist
-
-    if (currentPlaylist.length === 0) {
-      return null
-    }
-
-    return map(currentPlaylist, (song, i) => {
-      return <li key={i} onClick={() => this.setState({ currentVideoCount: i })}>{song.title}</li>
-    })
-  }
-
-  whenVideoEnds() {
-      this.setState({
-        currentVideoCount: this.state.currentVideoCount + 1
-      })
-  }
-
-  renderVideo() {
-    const { currentPlaylist } = this.props.playlist
-
-    if (currentPlaylist.length === 0) {
-      return null
-    }
-
-    const count = this.state.currentVideoCount
-    const videoId = currentPlaylist[count].videoId
-
-    return (
-      <YouTube
-          videoId={videoId}
-          onEnd={this.whenVideoEnds}
-          opts={{ height: "390", width: "640", playerVars: { autoplay: 1 }}} />
-    )
-  }
-
-  render () {
-    const { playlist } = this.props
-
-    let message
-
-    if (playlist.error) {
-      message = playlist.error
-    } else {
-      message = playlist.activePlaylist
-    }
-
-    return (
-      <div>
-        <h1>Playlist</h1>
-        <p>{message}</p>
-        {this.renderVideo()}
-        <ul>
-          {this.renderSongs()}
-        </ul>
-        <div>
-          <Search {...this.props} />
-        </div>
+const Playlist = ({playlistName, songs, playSong, currentVideo}) => {
+  return (
+    <div style={containerStyle}>
+      <div style={titleContainerStyle}>
+        <span style={titleFontStyle}>Playlist: <span style={{ color: '#DAA520'}}>{playlistName}</span></span>
       </div>
-    )
-  }
+      <div style={listStyle}>
+        <ul style={{padding: 0}}>
+          {
+            map(songs, (song, i) => {
+              return (
+                <div key={i} onClick={() => playSong(i)}>
+                  <VideoItem isPlaying={i === currentVideo} video={song} />
+                </div>
+              )
+            })
+          }
+        </ul>
+      </div>
+    </div>
+  )
 }
 
 export default Playlist
