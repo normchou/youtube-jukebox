@@ -3,5 +3,5 @@ node_modules
 build
 *.log
 
-./server/database/config.js
-./server/youtubeUtils/clientSecret.js
+server/database/config.js
+server/youtubeUtils/config.js

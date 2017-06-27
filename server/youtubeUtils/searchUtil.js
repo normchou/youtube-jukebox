@@ -1,7 +1,7 @@
 const google = require('googleapis')
 const fs = require('fs')
 const authorize = require('./authUtil')
-const clientSecret = require('./clientSecret.js')
+const clientSecret = require('./config.js')
 
 const search = (auth, searchTerm) => {
   let service = google.youtube('v3')
