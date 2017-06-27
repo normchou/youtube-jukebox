@@ -21,6 +21,10 @@ export default (state=initialState, action) => {
       state = assign({}, state, { loading: false })
       return state
 
+    case actionType.RESET_YOUTUBE_SEARCH:
+      state = assign({}, state, { result: {} })
+      return state
+
     default:
       return state
   }

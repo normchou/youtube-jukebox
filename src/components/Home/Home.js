@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import cx from 'classnames'
-import Video from './Video'
-import Playlist from './Playlist'
-import Search from './Search'
 import { get } from 'lodash'
+import cx from 'classnames'
+import Video from '../Video/Video'
+import Playlist from '../Playlist/Playlist'
+import Search from '../Search/Search'
 
 import './Home.css'
 

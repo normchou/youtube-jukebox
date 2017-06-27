@@ -86,16 +86,16 @@
   right: 0;
 }
 
-@media screen and (max-width: 979px) {
+@media only screen
+  and (max-width: 979px) {
     .content-container {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      overflow: hidden;
     }
 
     .video-container {
       width: 100%;
-      height: 450px;
     }
 
     .playlist-container {

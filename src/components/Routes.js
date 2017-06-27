@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import { loadPlaylist, createPlaylist, updatePlaylist } from '../actions/playlistActions'
 import { searchYouTube } from '../actions/searchActions'
-import Home from './Home'
-import Playlist from './Playlist'
-import Search from './Search'
+import Home from './Home/Home'
+import Playlist from './Playlist/Playlist'
+import Search from './Search/Search'
 
 class Routes extends Component {
   constructor(props) {

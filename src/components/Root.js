@@ -6,7 +6,6 @@ import configureStore from '../store/configureStore'
 import Routes from './Routes'
 import history from './history'
 import { Route } from 'react-router'
-import Playlist from './Playlist'
 
 const App = withRouter(Routes)
 

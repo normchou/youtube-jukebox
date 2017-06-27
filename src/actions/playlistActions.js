@@ -65,6 +65,7 @@ export const createPlaylist = (playlistName) => {
 export const updatePlaylist = (playlistName, video) => {
   return dispatch => {
     dispatch({ type: actionType.UPDATE_PLAYLIST_REQUEST })
+    dispatch({ type: actionType.UPDATE_PLAYLIST_REQUEST })
 
     axios.post(`${routes.playlist.api}/update`, { name: playlistName, video })
       .then(res => {
@@ -72,6 +73,7 @@ export const updatePlaylist = (playlistName, video) => {
           type: actionType.UPDATE_PLAYLIST_SUCCESS,
           payload: res.data
         })
+        dispatch({ type: actionType.RESET_YOUTUBE_SEARCH })
         // dispatch(push(`/playlist/${playlistName}`))
       })
       .catch(err => {
